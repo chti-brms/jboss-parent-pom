@@ -20,8 +20,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.jboss</groupId>
-    <version>40-SNAPSHOT</version>
+    <groupId>org.chtijbug.jboss</groupId>
+    <version>36-chtijbug</version>
     <artifactId>jboss-parent</artifactId>
 
     <packaging>pom</packaging>
@@ -36,9 +36,9 @@
     </issueManagement>
 
     <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
-        <connection>scm:git:git@github.com:jboss/jboss-parent-pom.git</connection>
-        <developerConnection>scm:git:git@github.com:jboss/jboss-parent-pom.git</developerConnection>
-        <url>http://github.com/jboss/jboss-parent-pom</url>
+        <connection>scm:git:git@github.com:chti-brms/jboss-parent-pom.git</connection>
+        <developerConnection>scm:git:git@github.com:chti-brms/jboss-parent-pom.git</developerConnection>
+        <url>https://github.com/chti-brms/jboss-parent-pom</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -49,6 +49,12 @@
             <organization>JBoss.org</organization>
             <organizationUrl>http://www.jboss.org</organizationUrl>
         </developer>
+      <developer>
+        <id>chtijbug.org</id>
+        <name>chtijbug.org Community</name>
+        <organization>chtijbug.org</organization>
+        <organizationUrl>https://www.chtijbug.org</organizationUrl>
+      </developer>
     </developers>
 
     <mailingLists>
@@ -135,10 +141,6 @@
       <!-- ***************** -->
       <!-- Repository Deployment URLs -->
       <!-- ***************** -->
-      <jboss.releases.repo.id>jboss-releases-repository</jboss.releases.repo.id>
-      <jboss.releases.repo.url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</jboss.releases.repo.url>
-      <jboss.snapshots.repo.id>jboss-snapshots-repository</jboss.snapshots.repo.id>
-      <jboss.snapshots.repo.url>https://repository.jboss.org/nexus/content/repositories/snapshots/</jboss.snapshots.repo.url>
 
       <!-- ************** -->
       <!-- Build settings -->
@@ -876,11 +878,10 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-gpg-plugin</artifactId>
-              <configuration>
-                <useAgent>true</useAgent>
-              </configuration>
               <executions>
                 <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
                   <goals>
                     <goal>sign</goal>
                   </goals>
@@ -1581,17 +1582,15 @@
       </pluginRepository>
     </pluginRepositories>
 
-    <distributionManagement>
-      <repository>
-        <id>${jboss.releases.repo.id}</id>
-        <name>JBoss Releases Repository</name>
-        <url>${jboss.releases.repo.url}</url>
-      </repository>
-      <snapshotRepository>
-        <id>${jboss.snapshots.repo.id}</id>
-        <name>JBoss Snapshots Repository</name>
-        <url>${jboss.snapshots.repo.url}</url>
-      </snapshotRepository>
-    </distributionManagement>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
 </project>
